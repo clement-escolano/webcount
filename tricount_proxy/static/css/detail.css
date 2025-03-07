@@ -1,0 +1,36 @@
+header {
+    background-color: #3493d5;
+    color: white;
+    padding: 0.5rem;
+    display: grid;
+    gap: 0.5rem;
+}
+
+.members span:not(:last-child)::after {
+    content: ", "
+}
+
+.expense {
+    padding: 0.5rem;
+    display: grid;
+    grid-template:
+        "title amount"
+        "owner date";
+    gap: 0.25rem;
+}
+
+.expense-title, .expense-amount {
+    font-size: 1.125rem;
+}
+
+.expense-date, .expense-owner {
+    font-size: 0.875rem;
+}
+
+.expense-amount, .expense-date {
+    justify-self: end;
+}
+
+.expense:not(:last-child) {
+    border-bottom: 1px solid grey;
+}

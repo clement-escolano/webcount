@@ -1,0 +1,52 @@
+[project]
+name = "tricount-web"
+version = "0.1.0"
+description = "Tricount web interface"
+requires-python = ">=3.13"
+dependencies = [
+    "cryptography>=44.0.2",
+    "django>=5.1.6",
+    "requests>=2.32.3",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.9.9",
+]
+
+
+[tool.ruff]
+target-version = "py313"
+
+[tool.ruff.lint]
+select = [
+    "B",
+    "C4",
+    "E",
+    "ERA",
+    "F",
+    "INT",
+    "N",
+    "PERF",
+    "RUF",
+    "S",
+    "SIM",
+    "TC005",
+    "UP",
+    "W",
+    "T201", # Checks for print statements.
+    "T203", # Checks for pprint statements.
+]
+ignore = [
+    "E501", # Do not enforce line-length violations as it is managed by ruff format
+    "RUF012", # Do not enforce use of ClassVar for mutable defaults because this pattern is extensively used in Django
+]
+unfixable = [
+    "F841", # Avoid removing a variable name when saving the value and not using it before
+]
+
+[tool.ruff.lint.per-file-ignores]
+"apps.py" = ["F401"]  # Ignore unused imports to allow importing signals
+
+[tool.ruff.format]
+docstring-code-format = true

@@ -1,0 +1,30 @@
+{% load i18n %}
+{% load l10n %}
+{% load static %}
+{% load money %}
+{% get_current_language as LANGUAGE_CODE %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }} - Tricount Web</title>
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/detail.css' %}">
+</head>
+<body>
+<header>
+    <h1>{{ title }}</h1>
+    <p class="members">{% for member in memberships %}
+        <span>{{ member }}</span>
+    {% endfor %}</p>
+</header>
+{% for expense in expenses %}
+    <div class="expense">
+        <span class="expense-title">{{ expense.description }}</span>
+        <span class="expense-amount">{% format_money expense.amount currency %}</span>
+        <span class="expense-owner">{% trans "paid by" %} <strong>{{ expense.owner }}</strong></span>
+        <span class="expense-date">{{ expense.date|date:"d/m/Y" }}</span>
+    </div>
+{% endfor %}
+</body>
+</html>
