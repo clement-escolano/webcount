@@ -45,6 +45,9 @@ def tricount_details(request, tricount_id: str):
                         }
                         for a in e["RegistryEntry"]["allocations"]
                     ],
+                    "allocations_have_ratio": any(
+                        "share_ratio" in a for a in e["RegistryEntry"]["allocations"]
+                    ),
                 }
                 for e in sorted(
                     registry["all_registry_entry"],

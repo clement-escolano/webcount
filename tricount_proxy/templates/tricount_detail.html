@@ -7,7 +7,7 @@
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8">
-    <title>{{ title }} - Tricount Web</title>
+    <title>{{ title }} - WebTricount</title>
     <link rel="stylesheet" href="{% static 'css/reset.css' %}">
     <link rel="stylesheet" href="{% static 'css/detail.css' %}">
 </head>
@@ -29,11 +29,18 @@
                 <span class="expense-owner">{% trans "paid by" %} <strong>{{ expense.owner }}</strong></span>
                 <span class="expense-date">{{ expense.date|date:"d/m/Y" }}</span>
             </summary>
-            <div class="expense-details">
+            <div class="expense-details{% if expense.allocations_have_ratio %} details-with-ratio{% endif %}">
                 {% for allocation in expense.allocations %}
                     <div class="expense-allocation">
                         <span>{{ allocation.name }}</span>
+                        <span></span> {# gap #}
                         <span class="allocation-amount">{% format_money allocation.amount currency %}</span>
+                        {% if expense.allocations_have_ratio %}
+                            <span class="allocation-ratio">{% if allocation.ratio %}
+                                {% blocktrans count ratio=allocation.ratio %}1 share{% plural %}{{ ratio }} shares
+                                {% endblocktrans %}
+                            {% endif %}</span>
+                        {% endif %}
                     </div>
                 {% endfor %}
             </div>

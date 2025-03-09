@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-07 21:03+0000\n"
+"POT-Creation-Date: 2025-03-09 21:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,6 +26,13 @@ msgstr "Anglais"
 msgid "French"
 msgstr "Français"
 
-#: tricount_proxy/templates/tricount_detail.html:25
+#: tricount_proxy/templates/tricount_detail.html:29
 msgid "paid by"
 msgstr "payé par"
+
+#: tricount_proxy/templates/tricount_detail.html:39
+#, python-format
+msgid "1 share"
+msgid_plural "%(ratio)s shares"
+msgstr[0] "1 part"
+msgstr[1] "%(ratio)s parts"
