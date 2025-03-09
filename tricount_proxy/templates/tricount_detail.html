@@ -13,28 +13,32 @@
 </head>
 <body>
 <header>
-    <h1>{{ title }}</h1>
-    <p class="members">{% for member in memberships %}
-        <span>{{ member }}</span>
-    {% endfor %}</p>
+    <div class="header-inner">
+        <h1>{{ title }}</h1>
+        <p class="members">{% for member in memberships %}
+            <span>{{ member }}</span>
+        {% endfor %}</p>
+    </div>
 </header>
-{% for expense in expenses %}
-    <details class="expense">
-        <summary class="expense-summary">
-            <span class="expense-title">{{ expense.description }}</span>
-            <span class="expense-amount">{% format_money expense.amount currency %}</span>
-            <span class="expense-owner">{% trans "paid by" %} <strong>{{ expense.owner }}</strong></span>
-            <span class="expense-date">{{ expense.date|date:"d/m/Y" }}</span>
-        </summary>
-        <div class="expense-details">
-            {% for allocation in expense.allocations %}
-                <div class="expense-allocation">
-                    <span>{{ allocation.name }}</span>
-                    <span>{% format_money allocation.amount currency %}</span>
-                </div>
-            {% endfor %}
-        </div>
-    </details>
-{% endfor %}
+<div class="expenses">
+    {% for expense in expenses %}
+        <details class="expense">
+            <summary class="expense-summary">
+                <span class="expense-title">{{ expense.description }}</span>
+                <span class="expense-amount">{% format_money expense.amount currency %}</span>
+                <span class="expense-owner">{% trans "paid by" %} <strong>{{ expense.owner }}</strong></span>
+                <span class="expense-date">{{ expense.date|date:"d/m/Y" }}</span>
+            </summary>
+            <div class="expense-details">
+                {% for allocation in expense.allocations %}
+                    <div class="expense-allocation">
+                        <span>{{ allocation.name }}</span>
+                        <span>{% format_money allocation.amount currency %}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        </details>
+    {% endfor %}
+</div>
 </body>
 </html>

@@ -1,3 +1,7 @@
+:root {
+    --max-width: 500px;
+}
+
 header {
     background-color: #3493d5;
     color: white;
@@ -6,8 +10,20 @@ header {
     gap: 0.5rem;
 }
 
+.header-inner {
+    max-width: var(--max-width);
+    margin: auto
+}
+
 .members span:not(:last-child)::after {
     content: ", "
+}
+
+.expenses {
+    max-width: var(--max-width);
+    margin: auto;
+    border: 1px solid grey;
+    border-top: none;
 }
 
 .expense {
