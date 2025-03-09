@@ -38,7 +38,7 @@ def tricount_details(request, tricount_id: str):
                     "allocations": [
                         {
                             "ratio": a.get("share_ratio"),
-                            "amount": float(a["amount"]["value"]),
+                            "amount": float(a["amount"]["value"]) * -1,
                             "name": a["membership"]["RegistryMembershipNonUser"][
                                 "alias"
                             ]["display_name"],

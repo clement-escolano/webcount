@@ -19,12 +19,22 @@
     {% endfor %}</p>
 </header>
 {% for expense in expenses %}
-    <div class="expense">
-        <span class="expense-title">{{ expense.description }}</span>
-        <span class="expense-amount">{% format_money expense.amount currency %}</span>
-        <span class="expense-owner">{% trans "paid by" %} <strong>{{ expense.owner }}</strong></span>
-        <span class="expense-date">{{ expense.date|date:"d/m/Y" }}</span>
-    </div>
+    <details class="expense">
+        <summary class="expense-summary">
+            <span class="expense-title">{{ expense.description }}</span>
+            <span class="expense-amount">{% format_money expense.amount currency %}</span>
+            <span class="expense-owner">{% trans "paid by" %} <strong>{{ expense.owner }}</strong></span>
+            <span class="expense-date">{{ expense.date|date:"d/m/Y" }}</span>
+        </summary>
+        <div class="expense-details">
+            {% for allocation in expense.allocations %}
+                <div class="expense-allocation">
+                    <span>{{ allocation.name }}</span>
+                    <span>{% format_money allocation.amount currency %}</span>
+                </div>
+            {% endfor %}
+        </div>
+    </details>
 {% endfor %}
 </body>
 </html>
