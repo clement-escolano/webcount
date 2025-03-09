@@ -32,12 +32,15 @@ header {
 
 .expense-summary {
     cursor: pointer;
-    padding-bottom: 0.5rem;
     display: grid;
     grid-template:
         "title amount"
         "owner date";
     gap: 0.25rem;
+}
+
+.expense[open] .expense-summary{
+    padding-bottom: 0.5rem;
 }
 
 .expense-title, .expense-amount {
