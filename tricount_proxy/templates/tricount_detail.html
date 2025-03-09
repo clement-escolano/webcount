@@ -33,7 +33,7 @@
                 {% for allocation in expense.allocations %}
                     <div class="expense-allocation">
                         <span>{{ allocation.name }}</span>
-                        <span>{% format_money allocation.amount currency %}</span>
+                        <span class="allocation-amount">{% format_money allocation.amount currency %}</span>
                     </div>
                 {% endfor %}
             </div>

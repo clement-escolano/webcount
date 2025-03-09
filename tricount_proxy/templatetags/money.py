@@ -22,7 +22,7 @@ currencies = {
 @register.simple_tag
 def format_money(amount: float, currency: str):
     language = get_language()
-    number = number_format(round(amount, 2), force_grouping=True)
+    number = number_format(round(amount, 2), decimal_pos=2, force_grouping=True)
     symbol = currencies.get(currency, currency)
     if language == "en":
         return f"{symbol}{number}"
