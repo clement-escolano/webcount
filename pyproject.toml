@@ -45,8 +45,5 @@ unfixable = [
     "F841", # Avoid removing a variable name when saving the value and not using it before
 ]
 
-[tool.ruff.lint.per-file-ignores]
-"apps.py" = ["F401"]  # Ignore unused imports to allow importing signals
-
 [tool.ruff.format]
 docstring-code-format = true

@@ -22,29 +22,39 @@
 </header>
 <div class="expenses">
     {% for expense in expenses %}
-        <details class="expense">
-            <summary class="expense-summary">
-                <span class="expense-title">{{ expense.description }}</span>
-                <span class="expense-amount">{% format_money expense.amount currency %}</span>
-                <span class="expense-owner">{% trans "paid by" %} <strong>{{ expense.owner }}</strong></span>
-                <span class="expense-date">{{ expense.date|date:"d/m/Y" }}</span>
-            </summary>
-            <div class="expense-details{% if expense.allocations_have_ratio %} details-with-ratio{% endif %}">
-                {% for allocation in expense.allocations %}
-                    <div class="expense-allocation">
-                        <span>{{ allocation.name }}</span>
-                        <span></span> {# gap #}
-                        <span class="allocation-amount">{% format_money allocation.amount currency %}</span>
-                        {% if expense.allocations_have_ratio %}
-                            <span class="allocation-ratio">{% if allocation.ratio %}
-                                {% blocktrans count ratio=allocation.ratio %}1 share{% plural %}{{ ratio }} shares
-                                {% endblocktrans %}
-                            {% endif %}</span>
-                        {% endif %}
-                    </div>
-                {% endfor %}
+        {% if expense.type == "EXPENSE" %}
+            <details class="expense">
+                <summary class="summary">
+                    <span class="title">{{ expense.description }}</span>
+                    <span class="amount">{% format_money expense.amount currency %}</span>
+                    <span class="owner">{% trans "paid by" %} <strong>{{ expense.owner }}</strong></span>
+                    <span class="date">{{ expense.date|date:"d/m/Y" }}</span>
+                </summary>
+                <div class="details{% if expense.allocations_have_ratio %} details-with-ratio{% endif %}">
+                    {% for allocation in expense.allocations %}
+                        <div class="allocation">
+                            <span>{{ allocation.name }}</span>
+                            <span></span> {# gap #}
+                            <span class="allocation-amount">{% format_money allocation.amount currency %}</span>
+                            {% if expense.allocations_have_ratio %}
+                                <span class="allocation-ratio">{% if allocation.ratio %}
+                                    {% blocktrans count ratio=allocation.ratio %}1 share{% plural %}{{ ratio }} shares{% endblocktrans %}
+                                {% endif %}</span>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </details>
+        {% else %}
+            <div class="refund">
+                <div class="summary">
+                    <span class="title">{{ expense.description }}</span>
+                    <span class="amount">{% format_money expense.amount currency %}</span>
+                    <span class="owner">{% trans "paid by" %} <strong>{{ expense.owner }}</strong> {% trans "for" %} <strong>{{ expense.target }}</strong></span>
+                    <span class="date">{{ expense.date|date:"d/m/Y" }}</span>
+                </div>
             </div>
-        </details>
+        {% endif %}
     {% endfor %}
 </div>
 </body>

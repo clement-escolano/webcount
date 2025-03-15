@@ -1,7 +1,6 @@
-from datetime import datetime
-
 from django.shortcuts import render
 
+from tricount_proxy.services.context import parse_expense, parse_refund
 from tricount_proxy.services.register import register_user
 from tricount_proxy.services.tricount_api import lookup
 
@@ -26,35 +25,15 @@ def tricount_details(request, tricount_id: str):
             ],
             "currency": registry["currency"],
             "expenses": [
-                {
-                    "amount": float(e["RegistryEntry"]["amount"]["value"]) * -1,
-                    "description": e["RegistryEntry"]["description"],
-                    "date": datetime.strptime(
-                        e["RegistryEntry"]["date"], "%Y-%m-%d %H:%M:%S.%f"
-                    ),
-                    "owner": e["RegistryEntry"]["membership_owned"][
-                        "RegistryMembershipNonUser"
-                    ]["alias"]["display_name"],
-                    "allocations": [
-                        {
-                            "ratio": a.get("share_ratio"),
-                            "amount": float(a["amount"]["value"]) * -1,
-                            "name": a["membership"]["RegistryMembershipNonUser"][
-                                "alias"
-                            ]["display_name"],
-                        }
-                        for a in e["RegistryEntry"]["allocations"]
-                    ],
-                    "allocations_have_ratio": any(
-                        "share_ratio" in a for a in e["RegistryEntry"]["allocations"]
-                    ),
-                }
+                parse_expense(e)
+                if e["RegistryEntry"]["type_transaction"] == "NORMAL"
+                else parse_refund(e)
                 for e in sorted(
                     registry["all_registry_entry"],
                     key=lambda e: e["RegistryEntry"]["date"],
                     reverse=True,
                 )
-                if e["RegistryEntry"]["type_transaction"] == "NORMAL"
+
             ],
         },
     )
