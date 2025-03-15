@@ -16,8 +16,12 @@
     <div class="header-inner">
         <h1>{{ title }}</h1>
         <p class="members">{% for member in memberships %}
-            <span>{{ member }}</span>
+            {{ member }}{% if not forloop.last %}, {% endif %}
         {% endfor %}</p>
+        <nav class="nav">
+            <label for="expenses"><input type="radio" id="expenses" name="menu" checked>{% trans "Expenses" %}</label>
+            <label for="balances"><input type="radio" id="balances" name="menu">{% trans "Balances" %}</label>
+        </nav>
     </div>
 </header>
 <div class="expenses">
@@ -38,7 +42,8 @@
                             <span class="allocation-amount">{% format_money allocation.amount currency %}</span>
                             {% if expense.allocations_have_ratio %}
                                 <span class="allocation-ratio">{% if allocation.ratio %}
-                                    {% blocktrans count ratio=allocation.ratio %}1 share{% plural %}{{ ratio }} shares{% endblocktrans %}
+                                    {% blocktrans count ratio=allocation.ratio %}1 share{% plural %}{{ ratio }} shares
+                                    {% endblocktrans %}
                                 {% endif %}</span>
                             {% endif %}
                         </div>
@@ -50,12 +55,39 @@
                 <div class="summary">
                     <span class="title">{{ expense.description }}</span>
                     <span class="amount">{% format_money expense.amount currency %}</span>
-                    <span class="owner">{% trans "paid by" %} <strong>{{ expense.owner }}</strong> {% trans "for" %} <strong>{{ expense.target }}</strong></span>
+                    <span class="owner">
+                        {% trans "paid by" %}
+                        <strong>{{ expense.owner }}</strong>
+                        {% trans "for" %}
+                        <strong>{{ expense.target }}</strong>
+                    </span>
                     <span class="date">{{ expense.date|date:"d/m/Y" }}</span>
                 </div>
             </div>
         {% endif %}
     {% endfor %}
+</div>
+<div class="balances">
+    <table>
+        <thead>
+        <tr>
+            <th class="left">{% trans "Name" %}</th>
+            <th class="right">{% trans "Total cost" %}</th>
+            <th class="right">{% trans "Balance" %}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for member in balance.summary %}
+            <tr>
+                <td>{{ member.name }}</td>
+                <td class="numeric">{% format_money member.total currency %}</td>
+                <td class="numeric {% if member.balance > 0.1 %}creditor{% elif member.balance < -0.1 %}debtor{% else %}neutral{% endif %}">
+                    <strong>{% format_money member.balance currency %}</strong>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </div>
 </body>
 </html>

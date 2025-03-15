@@ -1,4 +1,6 @@
+from collections import defaultdict
 from datetime import datetime
+from decimal import Decimal
 
 
 def _common_expense(expense: dict) -> dict:
@@ -50,5 +52,31 @@ def parse_refund(expense: dict) -> dict:
         "type": "REFUND",
         "target": allocations[0]["membership"]["RegistryMembershipNonUser"]["alias"][
             "display_name"
+        ],
+    }
+
+
+def parse_balance(entries: list[dict], memberships: dict[str, dict]) -> dict:
+    amounts = defaultdict(lambda: 0)
+    total_expenses = defaultdict(lambda: 0)
+    for entry in entries:
+        amounts[
+            entry["RegistryEntry"]["membership_owned"]["RegistryMembershipNonUser"][
+                "uuid"
+            ]
+        ] -= Decimal(entry["RegistryEntry"]["amount"]["value"])
+        for allocation in entry["RegistryEntry"]["allocations"]:
+            amounts[allocation["membership"]["RegistryMembershipNonUser"]["uuid"]] += (
+                Decimal(allocation["amount"]["value"])
+            )
+            if entry["RegistryEntry"]["type_transaction"] == "NORMAL":
+                total_expenses[
+                    allocation["membership"]["RegistryMembershipNonUser"]["uuid"]
+                ] -= Decimal(allocation["amount"]["value"])
+
+    return {
+        "summary": [
+            {"name": name, "total": total_expenses[uuid], "balance": amounts[uuid]}
+            for uuid, name in memberships.items()
         ],
     }

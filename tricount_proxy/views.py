@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from tricount_proxy.services.context import parse_expense, parse_refund
+from tricount_proxy.services.context import parse_expense, parse_refund, parse_balance
 from tricount_proxy.services.register import register_user
 from tricount_proxy.services.tricount_api import lookup
 
@@ -13,16 +13,21 @@ def tricount_details(request, tricount_id: str):
         request.session["token"] = str(token)
     registry = lookup(tricount_id, request.session)["Response"][0]["Registry"]
 
+    memberships = {
+        m["RegistryMembershipNonUser"]["uuid"]: m["RegistryMembershipNonUser"]["alias"][
+            "display_name"
+        ]
+        for m in registry["memberships"]
+        if m["RegistryMembershipNonUser"]["status"] == "ACTIVE"
+    }
+    balance = parse_balance(registry["all_registry_entry"], memberships)
+
     return render(
         request,
         "tricount_detail.html",
         {
             "title": registry["title"],
-            "memberships": [
-                m["RegistryMembershipNonUser"]["alias"]["display_name"]
-                for m in registry["memberships"]
-                if m["RegistryMembershipNonUser"]["status"] == "ACTIVE"
-            ],
+            "memberships": memberships.values(),
             "currency": registry["currency"],
             "expenses": [
                 parse_expense(e)
@@ -33,7 +38,7 @@ def tricount_details(request, tricount_id: str):
                     key=lambda e: e["RegistryEntry"]["date"],
                     reverse=True,
                 )
-
             ],
+            "balance": balance,
         },
     )
