@@ -88,6 +88,17 @@
         {% endfor %}
         </tbody>
     </table>
+    <h3>{% trans "Refunds" %}</h3>
+    {% for refund in balance.refunds %}
+        <div class="refund-transaction">
+            <span class="refund-owner">{{ refund.owner }}</span>
+            <span class="refund-to">{% trans "owns to" %}</span>
+            <span class="refund-target">{{ refund.target }}</span>
+            <span class="refund-amount">{% format_money refund.amount currency %}</span>
+        </div>
+    {% empty %}
+        <div>{% trans "Everything is good!" %}</div>
+    {% endfor %}
 </div>
 </body>
 </html>

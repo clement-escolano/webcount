@@ -190,3 +190,43 @@ header:has(#balances:checked) ~ .balances {
 .neutral {
     opacity: 0.6;
 }
+
+.balances h3 {
+    background-color: lightgray;
+    padding: 0.5rem;
+}
+
+
+@media (prefers-color-scheme: dark) {
+    .balances h3 {
+        background-color: #333;
+    }
+}
+
+.refund-transaction {
+    padding: 0.5rem;
+    display: grid;
+    gap: 0.125rem;
+    grid-template:
+        "owner amount"
+        "to amount"
+        "target amount";
+}
+
+.refund-transaction:not(:last-child) {
+    border-bottom: 1px solid grey;
+}
+
+.refund-owner, .refund-target {
+    font-size: 1.125rem;
+}
+
+.refund-to {
+    opacity: 0.6;
+}
+
+.refund-amount {
+    font-size: 1.25rem;
+    grid-area: amount;
+    place-self: center end;
+}

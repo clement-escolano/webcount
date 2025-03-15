@@ -74,9 +74,38 @@ def parse_balance(entries: list[dict], memberships: dict[str, dict]) -> dict:
                     allocation["membership"]["RegistryMembershipNonUser"]["uuid"]
                 ] -= Decimal(allocation["amount"]["value"])
 
+    debtors = sorted(
+        [(p, m) for p, m in amounts.items() if m > 0], key=lambda x: x[1], reverse=True
+    )
+    creditors = sorted(
+        [(p, -m) for p, m in amounts.items() if m < 0], key=lambda x: x[1], reverse=True
+    )
+
+    transactions = []
+
+    while debtors and creditors:
+        debtor, debt = debtors.pop(0)
+        creditor, credit = creditors.pop(0)
+
+        amount = min(debt, credit)
+        if amount > 0.10:
+            transactions.append(
+                {
+                    "owner": memberships[creditor],
+                    "target": memberships[debtor],
+                    "amount": amount,
+                }
+            )
+
+        if debt > credit:
+            debtors.insert(0, (debtor, debt - amount))
+        elif credit > debt:
+            creditors.insert(0, (creditor, credit - amount))
+
     return {
         "summary": [
             {"name": name, "total": total_expenses[uuid], "balance": amounts[uuid]}
             for uuid, name in memberships.items()
         ],
+        "refunds": transactions,
     }
