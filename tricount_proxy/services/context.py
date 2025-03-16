@@ -29,6 +29,7 @@ def parse_expense(expense: dict) -> dict:
                 ],
             }
             for a in expense["RegistryEntry"]["allocations"]
+            if float(a["amount"]["value"]) != 0
         ],
         "allocations_have_ratio": any(
             "share_ratio" in a for a in expense["RegistryEntry"]["allocations"]

@@ -230,3 +230,8 @@ header:has(#balances:checked) ~ .balances {
     grid-area: amount;
     place-self: center end;
 }
+
+.all-balanced {
+    padding: 0.5rem;
+    text-align: center;
+}

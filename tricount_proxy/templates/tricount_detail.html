@@ -42,8 +42,10 @@
                             <span class="allocation-amount">{% format_money allocation.amount currency %}</span>
                             {% if expense.allocations_have_ratio %}
                                 <span class="allocation-ratio">{% if allocation.ratio %}
-                                    {% blocktrans count ratio=allocation.ratio %}1 share{% plural %}{{ ratio }} shares
-                                    {% endblocktrans %}
+                                    {# Translation of values spanning multiple lines seems to not work. To avoid reformatting to move blocks, formatting is disabled here #}
+                                    {# @formatter:off #}
+                                    {% blocktrans count ratio=allocation.ratio %}1 share{% plural %}{{ ratio }} shares{% endblocktrans %}
+                                    {# @formatter:on #}
                                 {% endif %}</span>
                             {% endif %}
                         </div>
@@ -53,7 +55,7 @@
         {% else %}
             <div class="refund">
                 <div class="summary">
-                    <span class="title">{{ expense.description }}</span>
+                    <span class="title">{% trans "Reimbursement" %}</span>
                     <span class="amount">{% format_money expense.amount currency %}</span>
                     <span class="owner">
                         {% trans "paid by" %}
@@ -88,7 +90,7 @@
         {% endfor %}
         </tbody>
     </table>
-    <h3>{% trans "Refunds" %}</h3>
+    <h3>{% trans "Reimbursements" %}</h3>
     {% for refund in balance.refunds %}
         <div class="refund-transaction">
             <span class="refund-owner">{{ refund.owner }}</span>
@@ -97,7 +99,7 @@
             <span class="refund-amount">{% format_money refund.amount currency %}</span>
         </div>
     {% empty %}
-        <div>{% trans "Everything is good!" %}</div>
+        <div class="all-balanced">{% trans "Everything is good!" %}</div>
     {% endfor %}
 </div>
 </body>

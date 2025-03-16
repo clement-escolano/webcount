@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-15 20:36+0000\n"
+"POT-Creation-Date: 2025-03-16 21:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,45 +35,45 @@ msgid "Balances"
 msgstr "Équilibres"
 
 #: tricount_proxy/templates/tricount_detail.html:34
-#: tricount_proxy/templates/tricount_detail.html:59
+#: tricount_proxy/templates/tricount_detail.html:61
 msgid "paid by"
 msgstr "payé par"
 
-#: tricount_proxy/templates/tricount_detail.html:45
-#, fuzzy, python-format
-#| msgid "1 share"
-#| msgid_plural "%(ratio)s shares"
+#: tricount_proxy/templates/tricount_detail.html:47
+#, python-format
 msgid "1 share"
-msgid_plural ""
-"%(ratio)s shares\n"
-"                                    "
+msgid_plural "%(ratio)s shares"
 msgstr[0] "1 part"
 msgstr[1] "%(ratio)s parts"
 
-#: tricount_proxy/templates/tricount_detail.html:61
+#: tricount_proxy/templates/tricount_detail.html:58
+msgid "Reimbursement"
+msgstr "Remboursement"
+
+#: tricount_proxy/templates/tricount_detail.html:63
 msgid "for"
 msgstr "pour"
 
-#: tricount_proxy/templates/tricount_detail.html:74
+#: tricount_proxy/templates/tricount_detail.html:76
 msgid "Name"
 msgstr "Nom"
 
-#: tricount_proxy/templates/tricount_detail.html:75
+#: tricount_proxy/templates/tricount_detail.html:77
 msgid "Total cost"
 msgstr "Coût total"
 
-#: tricount_proxy/templates/tricount_detail.html:76
+#: tricount_proxy/templates/tricount_detail.html:78
 msgid "Balance"
 msgstr "Équilibre"
 
-#: tricount_proxy/templates/tricount_detail.html:91
-msgid "Refunds"
+#: tricount_proxy/templates/tricount_detail.html:93
+msgid "Reimbursements"
 msgstr "Remboursements"
 
-#: tricount_proxy/templates/tricount_detail.html:95
+#: tricount_proxy/templates/tricount_detail.html:97
 msgid "owns to"
 msgstr "doit à"
 
-#: tricount_proxy/templates/tricount_detail.html:100
+#: tricount_proxy/templates/tricount_detail.html:102
 msgid "Everything is good!"
 msgstr "Tout est bon !"
