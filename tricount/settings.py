@@ -81,7 +81,11 @@ LOCALE_PATHS = [BASE_DIR / "tricount_proxy/locale"]
 
 STATIC_ROOT = BASE_DIR / "static"
 STATIC_URL = "/static/"
-STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+    }
+}
 
 TRICOUNT_API = "https://api.tricount.bunq.com"
 TRICOUNT_USER_AGENT = "com.bunq.tricount.android:RELEASE:7.2.1:3260:ANDROID:9:C"
