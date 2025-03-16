@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-fnf%xwmomp@$r!d1a+sjoce^q56&6i6tek3od=re$*i))m-t_2"
+SECRET_KEY = "django-insecure-fnf%xwmomp@$r!d1a+sjoce^q56&6i6tek3od=re$*i))m-t_2"  # noqa: S105 # this is the local key
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

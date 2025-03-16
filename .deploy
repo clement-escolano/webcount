@@ -1,0 +1,5 @@
+DEPLOYMENT_DIRECTORY=/home/tricount/website
+GIT_BRANCH=main
+GIT_REPOSITORY=https://github.com/clement-escolano/web-tricount.git
+SSH_HOST=tricount@phenomene
+FRAMEWORKS="python"
