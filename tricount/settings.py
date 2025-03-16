@@ -85,3 +85,6 @@ STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesSto
 
 TRICOUNT_API = "https://api.tricount.bunq.com"
 TRICOUNT_USER_AGENT = "com.bunq.tricount.android:RELEASE:7.2.1:3260:ANDROID:9:C"
+
+SESSION_COOKIE_SAMESITE = "Strict"
+SESSION_COOKIE_SECURE = True
