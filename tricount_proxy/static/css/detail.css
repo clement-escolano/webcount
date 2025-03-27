@@ -77,6 +77,10 @@ header:has(#balances:checked) ~ .balances {
     gap: 0.25rem;
 }
 
+.summary::-webkit-details-marker {
+  display:none;
+}
+
 .expense[open] .summary {
     padding-bottom: 0.5rem;
 }
