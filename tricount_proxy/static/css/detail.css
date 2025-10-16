@@ -34,6 +34,11 @@ header:has(#balances:checked) ~ .container .balances {
 
 .nav label input {
     appearance: none;
+    outline: none;
+}
+
+.nav label:has(input:focus-visible) {
+    box-shadow: inset 0 0 0 2px  orange;
 }
 
 .expenses, .balances {
