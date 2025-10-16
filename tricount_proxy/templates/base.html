@@ -24,9 +24,15 @@
         {% block header %}{% endblock %}
     </div>
 </header>
-<div class="container">
+<main class="container">
     {% block content %}{% endblock %}
-</div>
-{% block footer %}{% endblock %}
+</main>
+<footer class="container">
+    {% block footer %}
+        <hr />
+        <p>WebCount, a simple web frontend for Tricount</p>
+        <a href="https://github.com/clement-escolano/webcount" target="_blank" rel="noopener">GitHub</a>
+    {% endblock %}
+</footer>
 </body>
 </html>
