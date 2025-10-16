@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-16 21:33+0000\n"
+"POT-Creation-Date: 2025-10-16 21:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -67,46 +67,46 @@ msgid "Balances"
 msgstr "Équilibres"
 
 #: tricount_proxy/templates/tricount_detail.html:36
-#: tricount_proxy/templates/tricount_detail.html:63
+#: tricount_proxy/templates/tricount_detail.html:64
 msgid "paid by"
 msgstr "payé par"
 
-#: tricount_proxy/templates/tricount_detail.html:49
+#: tricount_proxy/templates/tricount_detail.html:47
 #, python-format
 msgid "1 share"
 msgid_plural "%(ratio)s shares"
 msgstr[0] "1 part"
 msgstr[1] "%(ratio)s parts"
 
-#: tricount_proxy/templates/tricount_detail.html:60
+#: tricount_proxy/templates/tricount_detail.html:61
 msgid "Reimbursement"
 msgstr "Remboursement"
 
-#: tricount_proxy/templates/tricount_detail.html:65
+#: tricount_proxy/templates/tricount_detail.html:66
 msgid "for"
 msgstr "pour"
 
-#: tricount_proxy/templates/tricount_detail.html:78
+#: tricount_proxy/templates/tricount_detail.html:79
 msgid "Name"
 msgstr "Nom"
 
-#: tricount_proxy/templates/tricount_detail.html:79
+#: tricount_proxy/templates/tricount_detail.html:80
 msgid "Total cost"
 msgstr "Coût total"
 
-#: tricount_proxy/templates/tricount_detail.html:80
+#: tricount_proxy/templates/tricount_detail.html:81
 msgid "Balance"
 msgstr "Équilibre"
 
-#: tricount_proxy/templates/tricount_detail.html:95
+#: tricount_proxy/templates/tricount_detail.html:96
 msgid "Reimbursements"
 msgstr "Remboursements"
 
-#: tricount_proxy/templates/tricount_detail.html:99
+#: tricount_proxy/templates/tricount_detail.html:100
 msgid "owns to"
 msgstr "doit à"
 
-#: tricount_proxy/templates/tricount_detail.html:104
+#: tricount_proxy/templates/tricount_detail.html:105
 msgid "Everything is good!"
 msgstr "Tout est bon !"
 
