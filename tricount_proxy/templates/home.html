@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+    <title>WebCount</title>
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block header %}
+    <h1>WebCount</h1>
+    <p class="tagline">A simple web frontend for Tricount</p>
+{% endblock %}
+
+{% block content %}
+    <section class="content">
+        <p class="hint">
+            Replace the tricount domain with the WebCount domain and enjoy sharing expenses with your
+            friends through your browser!
+        </p>
+        <div class="transformation">
+            <p class="row">
+                <span class="label">Original link:</span>
+                <span class="url">
+                    <span class="domain">tricount.com</span>/tNJoFN...
+                </span>
+            </p>
+            <img src="{% static 'images/swirly-arrow.svg' %}" alt="" class="arrow">
+            <p class="row">
+                <span class="label">WebCount link:</span>
+                <span class="url">
+                    <span class="domain">{{ host }}</span>/tNJoFN...
+                </span>
+            </p>
+        </div>
+        <form method="POST" class="form">
+            {% csrf_token %}
+            <label for="url">
+                Paste the Tricount link:
+                <input type="url" id="url" name="url" placeholder="https://tricount.com/tNJoFN..." required>
+            </label>
+            <button type="submit">View on WebCount</button>
+        </form>
+    </section>
+{% endblock %}

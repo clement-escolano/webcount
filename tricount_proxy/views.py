@@ -1,8 +1,32 @@
-from django.shortcuts import render
+from django.conf import settings
+from django import forms
+from django.shortcuts import render, redirect
 
 from tricount_proxy.services.context import parse_expense, parse_refund, parse_balance
 from tricount_proxy.services.register import register_user
 from tricount_proxy.services.tricount_api import lookup
+
+
+class TricountLinkForm(forms.Form):
+    url = forms.URLField()
+
+
+def home(request):
+    errors: list[str] = []
+    if request.method == "POST":
+        form = TricountLinkForm(request.POST)
+        if form.is_valid():
+            tricount_id = form.cleaned_data["url"].split("/")[-1]
+            return redirect(
+                "tricount_details",
+                tricount_id=tricount_id,
+                permanent=False,
+            )
+        else:
+            errors = form.errors.get_json_data()["url"]
+    return render(
+        request, "home.html", {"host": settings.SITE_DOMAIN, "errors": errors}
+    )
 
 
 def tricount_details(request, tricount_id: str):

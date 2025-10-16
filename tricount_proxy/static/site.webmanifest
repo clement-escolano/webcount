@@ -1,6 +1,6 @@
 {
-  "name": "WebTricount",
-  "short_name": "WebTricount",
+  "name": "WebCount",
+  "short_name": "WebCount",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",

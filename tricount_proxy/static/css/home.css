@@ -1,0 +1,86 @@
+header {
+    padding: 1rem;
+}
+
+header .container {
+    display: grid;
+    justify-items: center;
+}
+
+.tagline {
+    opacity: 0.9;
+}
+
+.content {
+    display: grid;
+    gap: 2rem;
+    padding: 2rem 0;
+}
+
+.arrow {
+    transform: rotate(90deg);
+    width: 5rem;
+}
+
+.transformation {
+    display: grid;
+    gap: 0.75rem;
+    align-items: center;
+    justify-items: center;
+}
+
+.row {
+    display: grid;
+    gap: 0.125rem;
+   justify-items: center;
+}
+
+.label {
+    font-size: 0.825rem;
+    opacity: 0.9;
+}
+
+.url {
+    font-size: 1.5rem;
+}
+
+.domain {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.form {
+    display: grid;
+    gap: 0.5rem;
+    justify-items: center;
+}
+
+.form label {
+    display: grid;
+    gap: 0.25rem;
+    justify-items: center;
+}
+
+input {
+    min-width: 20rem;
+    font-size: 1.25rem;
+}
+
+.form button {
+    font-size: 1.25rem;
+    appearance: none;
+    border: none;
+    background: var(--primary-color);
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.form button:hover {
+    background: color-mix(in srgb, var(--primary-color) 80%, transparent);
+}
+
+.form button:active {
+   background: color-mix(in srgb, var(--primary-color) 60%, transparent);
+}

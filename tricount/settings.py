@@ -1,3 +1,4 @@
+from os import environ
 from pathlib import Path
 from django.utils.translation import gettext_lazy as _
 
@@ -10,6 +11,7 @@ SECRET_KEY = "django-insecure-fnf%xwmomp@$r!d1a+sjoce^q56&6i6tek3od=re$*i))m-t_2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+SITE_DOMAIN = environ.get("HOST", "localhost:8000")
 ALLOWED_HOSTS = []
 
 

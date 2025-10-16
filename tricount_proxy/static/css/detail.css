@@ -6,8 +6,8 @@ h1 {
     display: none;
 }
 
-header:has(#expenses:checked) ~ .container .expenses,
-header:has(#balances:checked) ~ .container .balances {
+header:has(#expenses:checked) ~ main .container .expenses,
+header:has(#balances:checked) ~ main .container .balances {
     display: block;
 }
 
