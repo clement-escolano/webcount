@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{% load i18n %}
 {% load static %}
 
 {% block title %}
@@ -12,25 +13,24 @@
 
 {% block header %}
     <h1>WebCount</h1>
-    <p class="tagline">A simple web frontend for Tricount</p>
+    <p class="tagline">{% trans "A simple web frontend for Tricount" %}</p>
 {% endblock %}
 
 {% block content %}
     <section class="content">
         <p class="hint">
-            Replace the tricount domain with the WebCount domain and enjoy sharing expenses with your
-            friends through your browser!
+            {% trans "Replace the Tricount domain with the WebCount domain and enjoy sharing expenses with your friends through your browser!" %}
         </p>
         <div class="transformation">
             <p class="row">
-                <span class="label">Original link:</span>
+                <span class="label">{% trans "Original link:" %}</span>
                 <span class="url">
                     <span class="domain">tricount.com</span>/tNJoFN...
                 </span>
             </p>
             <img src="{% static 'images/swirly-arrow.svg' %}" alt="" class="arrow">
             <p class="row">
-                <span class="label">WebCount link:</span>
+                <span class="label">{% trans "WebCount link:" %}</span>
                 <span class="url">
                     <span class="domain">{{ host }}</span>/tNJoFN...
                 </span>
@@ -42,10 +42,10 @@
                 <p class="error">{{ error.message }}</p>
             {% endfor %}
             <label for="url">
-                Paste the Tricount link:
+                {% trans "Paste the Tricount link:" %}
                 <input type="url" id="url" name="url" placeholder="https://tricount.com/tNJoFN..." required>
             </label>
-            <button type="submit">View on WebCount</button>
+            <button type="submit">{% trans "View on WebCount" %}</button>
         </form>
     </section>
 {% endblock %}

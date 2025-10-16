@@ -21,7 +21,7 @@ class TricountLinkForm(forms.Form):
         if parsed_url.netloc != required_domain:
             raise forms.ValidationError(
                 _("The link must start with %(required_prefix)s")
-                % {"required_prefix": required_domain}
+                % {"required_prefix": "https://" + required_domain}
             )
         try:
             match = resolve(parsed_url.path)

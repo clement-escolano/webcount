@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-16 21:20+0000\n"
+"POT-Creation-Date: 2025-10-16 21:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,62 +18,103 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: tricount/settings.py:76
+#: tricount/settings.py:78
 msgid "English"
 msgstr "Anglais"
 
-#: tricount/settings.py:77
+#: tricount/settings.py:79
 msgid "French"
 msgstr "Français"
+
+#: tricount_proxy/templates/base.html:35
+msgid "provided by Clément Escolano"
+msgstr "hébergé par Clément Escolano"
+
+#: tricount_proxy/templates/home.html:16
+msgid "A simple web frontend for Tricount"
+msgstr "Une interface web simple pour Tricount"
+
+#: tricount_proxy/templates/home.html:22
+msgid ""
+"Replace the Tricount domain with the WebCount domain and enjoy sharing "
+"expenses with your friends through your browser!"
+msgstr ""
+"Remplacez le domaine de Tricount par le domaine WebCount et renseignez vos "
+"dépendes avec vos amis via votre navigateur !"
+
+#: tricount_proxy/templates/home.html:26
+msgid "Original link:"
+msgstr "Lien original :"
+
+#: tricount_proxy/templates/home.html:33
+msgid "WebCount link:"
+msgstr "Lien WebCount :"
+
+#: tricount_proxy/templates/home.html:45
+msgid "Paste the Tricount link:"
+msgstr "Copiez le lien Tricount :"
+
+#: tricount_proxy/templates/home.html:48
+msgid "View on WebCount"
+msgstr "Voir sur WebCount"
 
 #: tricount_proxy/templates/tricount_detail.html:22
 msgid "Expenses"
 msgstr "Dépenses"
 
-#: tricount_proxy/templates/tricount_detail.html:23
+#: tricount_proxy/templates/tricount_detail.html:24
 msgid "Balances"
 msgstr "Équilibres"
 
-#: tricount_proxy/templates/tricount_detail.html:34
-#: tricount_proxy/templates/tricount_detail.html:61
+#: tricount_proxy/templates/tricount_detail.html:36
+#: tricount_proxy/templates/tricount_detail.html:63
 msgid "paid by"
 msgstr "payé par"
 
-#: tricount_proxy/templates/tricount_detail.html:47
+#: tricount_proxy/templates/tricount_detail.html:49
 #, python-format
 msgid "1 share"
 msgid_plural "%(ratio)s shares"
 msgstr[0] "1 part"
 msgstr[1] "%(ratio)s parts"
 
-#: tricount_proxy/templates/tricount_detail.html:58
+#: tricount_proxy/templates/tricount_detail.html:60
 msgid "Reimbursement"
 msgstr "Remboursement"
 
-#: tricount_proxy/templates/tricount_detail.html:63
+#: tricount_proxy/templates/tricount_detail.html:65
 msgid "for"
 msgstr "pour"
 
-#: tricount_proxy/templates/tricount_detail.html:76
+#: tricount_proxy/templates/tricount_detail.html:78
 msgid "Name"
 msgstr "Nom"
 
-#: tricount_proxy/templates/tricount_detail.html:77
+#: tricount_proxy/templates/tricount_detail.html:79
 msgid "Total cost"
 msgstr "Coût total"
 
-#: tricount_proxy/templates/tricount_detail.html:78
+#: tricount_proxy/templates/tricount_detail.html:80
 msgid "Balance"
 msgstr "Équilibre"
 
-#: tricount_proxy/templates/tricount_detail.html:93
+#: tricount_proxy/templates/tricount_detail.html:95
 msgid "Reimbursements"
 msgstr "Remboursements"
 
-#: tricount_proxy/templates/tricount_detail.html:97
+#: tricount_proxy/templates/tricount_detail.html:99
 msgid "owns to"
 msgstr "doit à"
 
-#: tricount_proxy/templates/tricount_detail.html:102
+#: tricount_proxy/templates/tricount_detail.html:104
 msgid "Everything is good!"
 msgstr "Tout est bon !"
+
+#: tricount_proxy/views.py:23
+#, python-format
+msgid "The link must start with %(required_prefix)s"
+msgstr "Le lien doit commencer par %(required_prefix)s"
+
+#: tricount_proxy/views.py:29 tricount_proxy/views.py:31
+msgid "This Tricount link is not valid."
+msgstr "Ce lien Tricount n’est pas valide."

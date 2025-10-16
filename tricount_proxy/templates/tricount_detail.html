@@ -60,11 +60,11 @@
                         <span class="title">{% trans "Reimbursement" %}</span>
                         <span class="amount">{% format_money expense.amount currency %}</span>
                         <span class="owner">
-                        {% trans "paid by" %}
-                        <strong>{{ expense.owner }}</strong>
-                        {% trans "for" %}
-                        <strong>{{ expense.target }}</strong>
-                    </span>
+                            {% trans "paid by" %}
+                            <strong>{{ expense.owner }}</strong>
+                            {% trans "for" %}
+                            <strong>{{ expense.target }}</strong>
+                        </span>
                         <span class="date">{{ expense.date|date:"d/m/Y" }}</span>
                     </div>
                 </div>
