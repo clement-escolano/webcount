@@ -55,6 +55,10 @@ header .container {
     justify-items: center;
 }
 
+.error {
+    color: #d8564b;
+}
+
 .form label {
     display: grid;
     gap: 0.25rem;

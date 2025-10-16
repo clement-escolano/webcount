@@ -1,5 +1,9 @@
+from urllib.parse import urlparse
+
 from django.conf import settings
 from django import forms
+from django.urls import resolve, Resolver404
+from django.utils.translation import gettext_lazy as _
 from django.shortcuts import render, redirect
 
 from tricount_proxy.services.context import parse_expense, parse_refund, parse_balance
@@ -10,13 +14,31 @@ from tricount_proxy.services.tricount_api import lookup
 class TricountLinkForm(forms.Form):
     url = forms.URLField()
 
+    def clean_url(self):
+        url = self.cleaned_data["url"]
+        required_domain = "tricount.com"
+        parsed_url = urlparse(url)
+        if parsed_url.netloc != required_domain:
+            raise forms.ValidationError(
+                _("The link must start with %(required_prefix)s")
+                % {"required_prefix": required_domain}
+            )
+        try:
+            match = resolve(parsed_url.path)
+        except Resolver404:
+            raise forms.ValidationError(_("This Tricount link is not valid.")) from None
+        if match.view_name != "tricount_details":
+            raise forms.ValidationError(_("This Tricount link is not valid."))
+        self.cleaned_data["tricount_id"] = match.kwargs.get("tricount_id")
+        return url
+
 
 def home(request):
     errors: list[str] = []
     if request.method == "POST":
         form = TricountLinkForm(request.POST)
         if form.is_valid():
-            tricount_id = form.cleaned_data["url"].split("/")[-1]
+            tricount_id = form.cleaned_data["tricount_id"]
             return redirect(
                 "tricount_details",
                 tricount_id=tricount_id,

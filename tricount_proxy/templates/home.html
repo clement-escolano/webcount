@@ -38,6 +38,9 @@
         </div>
         <form method="POST" class="form">
             {% csrf_token %}
+            {% for error in errors %}
+                <p class="error">{{ error.message }}</p>
+            {% endfor %}
             <label for="url">
                 Paste the Tricount link:
                 <input type="url" id="url" name="url" placeholder="https://tricount.com/tNJoFN..." required>
