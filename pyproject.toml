@@ -4,14 +4,14 @@ version = "0.1.0"
 description = "Tricount web interface"
 requires-python = ">=3.13"
 dependencies = [
-    "cryptography>=44.0.2",
-    "django>=5.1.6",
-    "requests>=2.32.3",
+    "cryptography",
+    "django",
+    "requests",
 ]
 
 [dependency-groups]
 dev = [
-    "ruff>=0.9.9",
+    "ruff",
 ]
 
 
