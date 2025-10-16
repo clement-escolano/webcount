@@ -1,0 +1,18 @@
+:root {
+    --max-width: 500px;
+}
+
+header {
+    background-color: #3493d5;
+    color: white;
+    padding: 0 0.5rem;
+    display: grid;
+    gap: 0.5rem;
+}
+
+
+.container {
+    max-width: var(--max-width);
+    width: 100%;
+    margin: auto
+}
