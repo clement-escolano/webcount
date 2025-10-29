@@ -165,7 +165,8 @@ header:has(#balances:checked) ~ main .container .balances {
 
 .add-expense-form div {
     display: grid;
-    grid-template-columns: 100px 1fr;
+    grid-template-columns: 150px 1fr;
+    gap: 0.5rem;
 }
 
 .add-expense-form label {
