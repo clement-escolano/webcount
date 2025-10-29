@@ -11,10 +11,10 @@ class SessionDict(TypedDict):
     token: str
 
 
-def lookup(tricount_id: str, session: SessionDict) -> dict:
+def get_registry(session: SessionDict, tricount_public_identifier: str) -> dict:
     response = requests.get(
         settings.TRICOUNT_API
-        + f"/v1/user/{session['user_id']}/registry?public_identifier_token={tricount_id}",
+        + f"/v1/user/{session['user_id']}/registry?public_identifier_token={tricount_public_identifier}",
         headers={
             "User-Agent": settings.TRICOUNT_USER_AGENT,
             "app-id": session["app_installation_uuid"],
@@ -24,4 +24,4 @@ def lookup(tricount_id: str, session: SessionDict) -> dict:
         timeout=5,
     )
     response.raise_for_status()
-    return response.json()
+    return response.json()["Response"][0]["Registry"]

@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect
 
 from tricount_proxy.services.context import parse_expense, parse_refund, parse_balance
 from tricount_proxy.services.register import register_user
-from tricount_proxy.services.tricount_api import lookup
+from tricount_proxy.services.tricount_api import get_registry
 
 
 class TricountLinkForm(forms.Form):
@@ -29,7 +29,9 @@ class TricountLinkForm(forms.Form):
             raise forms.ValidationError(_("This Tricount link is not valid.")) from None
         if match.view_name != "tricount_details":
             raise forms.ValidationError(_("This Tricount link is not valid."))
-        self.cleaned_data["tricount_id"] = match.kwargs.get("tricount_id")
+        self.cleaned_data["tricount_public_identifier"] = match.kwargs.get(
+            "tricount_public_identifier"
+        )
         return url
 
 
@@ -38,10 +40,10 @@ def home(request):
     if request.method == "POST":
         form = TricountLinkForm(request.POST)
         if form.is_valid():
-            tricount_id = form.cleaned_data["tricount_id"]
+            tricount_public_identifier = form.cleaned_data["tricount_public_identifier"]
             return redirect(
                 "tricount_details",
-                tricount_id=tricount_id,
+                tricount_public_identifier=tricount_public_identifier,
                 permanent=False,
             )
         else:
@@ -51,13 +53,18 @@ def home(request):
     )
 
 
-def tricount_details(request, tricount_id: str):
-    if "app_installation_uuid" not in request.session:
+def tricount_details(request, tricount_public_identifier: str):
+    if (
+        "app_installation_uuid" not in request.session
+        or request.session.get("tricount_public_identifier")
+        != tricount_public_identifier
+    ):
         (app_installation_uuid, token, user_id) = register_user()
         request.session["user_id"] = user_id
         request.session["app_installation_uuid"] = str(app_installation_uuid)
         request.session["token"] = str(token)
-    registry = lookup(tricount_id, request.session)["Response"][0]["Registry"]
+        request.session["tricount_public_identifier"] = tricount_public_identifier
+    registry = get_registry(request.session, tricount_public_identifier)
 
     memberships = {
         m["RegistryMembershipNonUser"]["uuid"]: m["RegistryMembershipNonUser"]["alias"][
