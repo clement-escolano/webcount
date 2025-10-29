@@ -45,9 +45,9 @@
                                 {% if expense.allocations_have_ratio %}
                                     <span class="allocation-ratio">{% if allocation.ratio %}
                                         {% blocktrans trimmed count ratio=allocation.ratio %}
-                                        1 share
+                                            1 share
                                         {% plural %}
-                                        {{ ratio }} shares
+                                            {{ ratio }} shares
                                         {% endblocktrans %}
                                     {% endif %}</span>
                                 {% endif %}
@@ -71,6 +71,19 @@
                 </div>
             {% endif %}
         {% endfor %}
+        <details class="add-expense">
+            <summary class="summary">
+                <span class="title">
+                    <img class="add-expense-icon" src="{% static 'images/plus.svg' %}" alt="">
+                    {% trans "Add an expense" %}
+                </span>
+            </summary>
+            <form method="POST" class="details add-expense-form">
+                {% csrf_token %}
+                {{ new_expense_form }}
+                <button type="submit">{% trans "Add" %}</button>
+            </form>
+        </details>
     </div>
     <div class="balances">
         <table>

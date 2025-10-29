@@ -38,7 +38,7 @@ header:has(#balances:checked) ~ main .container .balances {
 }
 
 .nav label:has(input:focus-visible) {
-    box-shadow: inset 0 0 0 2px  orange;
+    box-shadow: inset 0 0 0 2px orange;
 }
 
 .expenses, .balances {
@@ -46,11 +46,11 @@ header:has(#balances:checked) ~ main .container .balances {
     border-top: none;
 }
 
-.expense, .refund {
+.expense, .refund, .add-expense {
     padding: 0.5rem;
 }
 
-.expense .summary {
+.expense .summary, .add-expense .summary {
     cursor: pointer;
 }
 
@@ -66,7 +66,7 @@ header:has(#balances:checked) ~ main .container .balances {
     display: none;
 }
 
-.expense[open] .summary {
+.expense[open] .summary, .add-expense[open] .summary {
     padding-bottom: 0.5rem;
 }
 
@@ -126,7 +126,6 @@ header:has(#balances:checked) ~ main .container .balances {
     opacity: 0.6
 }
 
-
 .expense:not(:last-child), .refund:not(:last-child) {
     border-bottom: 1px solid grey;
 }
@@ -138,6 +137,43 @@ header:has(#balances:checked) ~ main .container .balances {
 .right {
     text-align: right;
 }
+
+.add-expense summary {
+    grid-template:
+        "title title"
+        "title title";
+    place-content: center;
+}
+
+.add-expense .title {
+    display: flex;
+    align-items: center;
+}
+
+.add-expense-icon {
+    width: 2rem;
+}
+
+.add-expense-form {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.add-expense-form button {
+    place-self: center;
+}
+
+.add-expense-form div {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+}
+
+.add-expense-form label {
+    text-wrap: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 
 .balances table {
     width: 100%;

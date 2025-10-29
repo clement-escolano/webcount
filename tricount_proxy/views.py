@@ -1,3 +1,4 @@
+import datetime
 from urllib.parse import urlparse
 
 from django.conf import settings
@@ -8,7 +9,8 @@ from django.shortcuts import render, redirect
 
 from tricount_proxy.services.context import parse_expense, parse_refund, parse_balance
 from tricount_proxy.services.register import register_user
-from tricount_proxy.services.tricount_api import get_registry
+from tricount_proxy.services.tricount_api import get_registry, add_expense
+from tricount_proxy.templatetags.money import currencies
 
 
 class TricountLinkForm(forms.Form):
@@ -73,7 +75,62 @@ def tricount_details(request, tricount_public_identifier: str):
         for m in registry["memberships"]
         if m["RegistryMembershipNonUser"]["status"] == "ACTIVE"
     }
-    balance = parse_balance(registry["all_registry_entry"], memberships)
+
+    class NewExpenseForm(forms.Form):
+        description = forms.CharField(label=_("Title"))
+        amount = forms.FloatField(
+            step_size=0.01,
+            max_value=1e6,
+            min_value=0,
+            label=_("Amount (%(currency)s)")
+            % {"currency": currencies.get(registry["currency"], registry["currency"])},
+        )
+        date = forms.DateField(
+            label=_("Date"),
+            initial=lambda: datetime.date.today().strftime("%Y-%m-%d"),
+            widget=forms.DateInput(attrs={"type": "date"}),
+        )
+        owner = forms.ChoiceField(label=_("Paid by"), choices=memberships.items())
+
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            for m in registry["memberships"]:
+                if m["RegistryMembershipNonUser"]["status"] == "ACTIVE":
+                    self.fields[m["RegistryMembershipNonUser"]["uuid"]] = (
+                        forms.IntegerField(
+                            label=m["RegistryMembershipNonUser"]["alias"][
+                                "display_name"
+                            ],
+                            initial=1,
+                            min_value=0,
+                        )
+                    )
+            self.label_suffix = ""
+
+    if request.method == "POST":
+        form = NewExpenseForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            add_expense(
+                request.session,
+                registry,
+                data["description"],
+                data["amount"],
+                (data["owner"], memberships[data["owner"]]),
+                data["date"],
+                [
+                    (
+                        m["RegistryMembershipNonUser"]["uuid"],
+                        data[m["RegistryMembershipNonUser"]["uuid"]],
+                    )
+                    for m in registry["memberships"]
+                    if m["RegistryMembershipNonUser"]["status"] == "ACTIVE"
+                ],
+            )
+            form = NewExpenseForm()
+            registry = get_registry(request.session, tricount_public_identifier)
+    else:
+        form = NewExpenseForm()
 
     return render(
         request,
@@ -92,6 +149,7 @@ def tricount_details(request, tricount_public_identifier: str):
                     reverse=True,
                 )
             ],
-            "balance": balance,
+            "balance": parse_balance(registry["all_registry_entry"], memberships),
+            "new_expense_form": form,
         },
     )

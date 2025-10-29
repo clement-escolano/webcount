@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-16 21:40+0000\n"
+"POT-Creation-Date: 2025-10-29 13:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -86,35 +86,60 @@ msgstr "Remboursement"
 msgid "for"
 msgstr "pour"
 
-#: tricount_proxy/templates/tricount_detail.html:79
+#: tricount_proxy/templates/tricount_detail.html:78
+msgid "Add an expense"
+msgstr "Ajouter une dépense"
+
+#: tricount_proxy/templates/tricount_detail.html:84
+msgid "Add"
+msgstr "Ajouter"
+
+#: tricount_proxy/templates/tricount_detail.html:92
 msgid "Name"
 msgstr "Nom"
 
-#: tricount_proxy/templates/tricount_detail.html:80
+#: tricount_proxy/templates/tricount_detail.html:93
 msgid "Total cost"
 msgstr "Coût total"
 
-#: tricount_proxy/templates/tricount_detail.html:81
+#: tricount_proxy/templates/tricount_detail.html:94
 msgid "Balance"
 msgstr "Équilibre"
 
-#: tricount_proxy/templates/tricount_detail.html:96
+#: tricount_proxy/templates/tricount_detail.html:109
 msgid "Reimbursements"
 msgstr "Remboursements"
 
-#: tricount_proxy/templates/tricount_detail.html:100
+#: tricount_proxy/templates/tricount_detail.html:113
 msgid "owns to"
 msgstr "doit à"
 
-#: tricount_proxy/templates/tricount_detail.html:105
+#: tricount_proxy/templates/tricount_detail.html:118
 msgid "Everything is good!"
 msgstr "Tout est bon !"
 
-#: tricount_proxy/views.py:23
+#: tricount_proxy/views.py:25
 #, python-format
 msgid "The link must start with %(required_prefix)s"
 msgstr "Le lien doit commencer par %(required_prefix)s"
 
-#: tricount_proxy/views.py:29 tricount_proxy/views.py:31
+#: tricount_proxy/views.py:31 tricount_proxy/views.py:33
 msgid "This Tricount link is not valid."
 msgstr "Ce lien Tricount n’est pas valide."
+
+#: tricount_proxy/views.py:80
+msgid "Title"
+msgstr "Titre"
+
+#: tricount_proxy/views.py:85
+#, python-format
+msgid "Amount (%(currency)s)"
+msgstr "Montant (%(currency)s)"
+
+#: tricount_proxy/views.py:89
+msgid "Date"
+msgstr "Date"
+
+#: tricount_proxy/views.py:93
+msgid "Paid by"
+msgstr "Payé par"
