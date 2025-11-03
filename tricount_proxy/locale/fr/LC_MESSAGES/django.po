@@ -40,7 +40,7 @@ msgid ""
 "expenses with your friends through your browser!"
 msgstr ""
 "Remplacez le domaine de Tricount par le domaine WebCount et renseignez vos "
-"dépendes avec vos amis via votre navigateur !"
+"dépenses avec vos amis via votre navigateur !"
 
 #: tricount_proxy/templates/home.html:26
 msgid "Original link:"
